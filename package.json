@@ -1,0 +1,23 @@
+{
+  "name": "backfester",
+  "version": "1.0.0",
+  "description": "backfester repo",
+  "main": "backfester.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonfester/backfester.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simonfester/backfester/issues"
+  },
+  "homepage": "https://github.com/simonfester/backfester#readme",
+  "dependencies": {
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
+  }
+}
