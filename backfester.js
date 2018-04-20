@@ -1,7 +1,8 @@
 const fs = require('fs'); // to access filesystem
+var data = require('./binanceHistData')
 const exchange = 'BIN';   // Supported: BIN
 const pair = 'BTCUSDT';   // pairs to trade
-const interval = '12h';   // Supported Intervals: 1m,3m,5m,15m,30m,1h,2h,4h,6h,8h,12h,1d,3d,1w,1M
+const interval = '1m';   // Supported Intervals: 1m,3m,5m,15m,30m,1h,2h,4h,6h,8h,12h,1d,3d,1w,1M
 
 var coinBalance = 0;
 var historicalData = {}; // object to hold the json file data
@@ -40,5 +41,3 @@ console.log('Total profit', coinBalance);
 console.log('Start date', start);
 console.log('End date', end);
 console.log('Interval', interval);
-
-
