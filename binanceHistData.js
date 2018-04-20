@@ -11,7 +11,7 @@ const options = {
     }
 };
 
-function getHistData () {
+exports.historicalData = function getHistData () {
 request(options)
     .then(function (response) {
         fs.writeFile("BIN_" + options.qs.symbol + "_" + options.qs.interval + ".json", (response), (err) => {
@@ -25,8 +25,6 @@ request(options)
         console.log(err)
     })
 }
-
-getHistData();
 
 /* JSON Array formatting:
 
