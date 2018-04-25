@@ -7,14 +7,14 @@ const options = {
     uri: 'https://api.binance.com/api/v1/klines?',
     qs: {
         symbol: 'BTCUSDT',
-        interval: '12h'
+        interval: '1h'
     }
 };
 
-exports.historicalData = function getHistData () {
+exports.getHistoricalData = function () {
 request(options)
     .then(function (response) {
-        fs.writeFile("BIN_" + options.qs.symbol + "_" + options.qs.interval + ".json", (response), (err) => {
+        fs.writeFile(__dirname + '/data/' + "BIN_" + options.qs.symbol + "_" + options.qs.interval + ".json", (response), (err) => {
             if (err) {
                 console.error(err);
             };
