@@ -6,7 +6,7 @@ const interval = '1d';   // Supported Intervals: 1m,3m,5m,15m,30m,1h,2h,4h,6h,8h
 const sellpercent = 1.30; // how much to buy
 const buypercent =1.30;
 
-var coinBalance = 0;
+var coinBalance = 1000;
 var historicalData = {}; // object to hold the json file data
 var openedPositions = 0; // holds number of trading positions open
 var openedPositionPrice = 0;
