@@ -7,7 +7,8 @@ var getHistoricalData = (exchange, pair, interval, callback) => {
         uri: 'https://api.binance.com/api/v1/klines?',
         qs: {
             symbol: pair,
-            interval: interval
+            interval: interval,
+            limit: 1000
         }
     };
 request(options)
