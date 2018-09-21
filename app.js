@@ -1,27 +1,40 @@
-const fs = require('fs'); // to access filesystem
-const data = require('./binanceHistData') //module to get historical data
-const exchange = 'BIN';   // Supported exchange: BIN
-const pair = 'BTCUSDT';   // pairs to trade
-const interval = '1d';   // Supported Intervals: 1m,3m,5m,15m,30m,1h,2h,4h,6h,8h,12h,1d,3d,1w,1M
-const sellpercent = 1.05; // how much to buy
-const buypercent = 1.05; // how much to sell
+// module includes
 
-var moment = require('moment');
-var initialFunds = 1000; // starting balance
-var funds = initialFunds;
+const fs = require('fs');  // to access filesystem
+const data = require('./binanceHistData')  // My module to get historical data
+const moment = require('moment'); // for date formatting
+
+// change these as required
+
+const exchange = 'BIN';  // Supported exchange: BIN
+const pair = 'BTCUSDT';  // Supported pairs: too many look in the documentation
+const interval = '1m';  // Supported Intervals: 1m,3m,5m,15m,30m,1h,2h,4h,6h,8h,12h,1d,3d,1w,1M
+const sellpercent = 1.10; // When price goes up by this much, sell.
+const buypercent = 1.05; // When price goes down by this much, buy.
+const initialFunds = 10000; // Starting balance
+
+// app variables
+
+var funds = initialFunds; // used in profit calculation
 var coins = 0; // holds purchased coins
 var historicalData = {}; // object to hold the json file data
 var openedPositions = 0; // holds number of trading positions open
-var buyPrice = 0;
-var sellPrice = 0;
+var buyPrice = 0; // holds buy price
+var sellPrice = 0; // holds sell price
 var position = 0; // if position is open, we start with no open positions
-var totalProfit = 0;
+var totalProfit = 0; // holds profit made
+
+// load historical data from file
+
 
 function loadJson() {
     historicalData = JSON.parse(fs.readFileSync(__dirname + '/data/' + exchange + '_' + pair + '_' + interval + '.json', 'utf8'));
-    console.log('JSON loaded')
     main();
 }
+
+// main
+
+console.log('Starting Portfolio =', initialFunds);
 
 function main() {
 for (index = 1; index < historicalData.length; index++) { 
@@ -50,13 +63,22 @@ for (index = 1; index < historicalData.length; index++) {
         }
     }
 }
-// Show some text in the console with red Color
-console.log("[31mSTATS[39m");
+
+// console logging // summary
+
+var startDate = new Date(historicalData[0][0]);
+var end = historicalData.length;
+//var endDate = new Date(historicalData[end][0]);
+console.log(historicalData.length);
+console.log('Start date', moment(startDate).format('LLL'));
+//console.log('End date', moment(endDate).format('LLL'));
 console.log('Total positions opened', openedPositions);
 console.log('Total Profit', totalProfit.toFixed(2));
 console.log('End Balance', funds);
 console.log('Interval', interval);
 }
+
+// get latest data from binance
 
 data.getHistoricalData(exchange, pair, interval, (errorMessage, results) => { // need to improve the error handling
     if (errorMessage) {
