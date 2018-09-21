@@ -17,7 +17,6 @@ request(options)
             if (err) {
                 callback('File could not be created ...');
             };
-            console.log("BIN_" + options.qs.symbol + "_" + options.qs.interval + ".json has been created :-)")
             callback(undefined, {
 
             })
